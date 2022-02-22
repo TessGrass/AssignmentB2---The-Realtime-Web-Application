@@ -1,0 +1,13 @@
+<h1>CURRENT ISSUES</h1>
+<div class ="">
+    <% if (snippet?.length > 0) { %>
+        <% snippet.forEach(obj => { %>
+            <div class="snippetwrapper">
+            <p class="titletext"><%= obj.title %></p>
+                                
+            </div>
+        <% }) %>
+      <% } else { %>
+          <p class="no-view-snippets-text">Oh no! No snippets to display. Sign in and start creating your own!</p>
+      <% } %>
+</div>
