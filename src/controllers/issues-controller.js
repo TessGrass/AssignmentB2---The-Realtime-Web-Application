@@ -16,8 +16,8 @@ export class IssuesController {
     try {
       console.log('index issues-controller')
       const fetchedData = await fetch(`https://gitlab.lnu.se/api/v4/projects/${process.env.PROJECT_ID}/issues?private_token=${process.env.TOKEN}`)
-      const data = await fetchedData.json()
-      const result = data.map(data => ({
+      const data2 = await fetchedData.json()
+      const data = data2.map(data => ({
 
         id: `${data.id}`,
         title: `${data.title}`,
@@ -25,8 +25,8 @@ export class IssuesController {
         state: `${data.state}`
       }))
 
-      console.log(result)
-      console.log(data)
+     /*  console.log(result)
+      console.log(data) */
       res.render('../views/issues/issues', { data })
     } catch (error) {
       next(error)

@@ -49,6 +49,10 @@ body > footer {
     margin-top: 10px;
 }
 
+.issuetext {
+  margin-left: 2rem;
+}
+
 hr {
   margin: 0px;
 }
