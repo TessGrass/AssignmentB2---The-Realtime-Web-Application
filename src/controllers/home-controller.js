@@ -1,5 +1,6 @@
 /**
  * Exports the HomeController class.
+ *
  */
 export class HomeController {
   /**

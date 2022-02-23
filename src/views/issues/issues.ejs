@@ -1,13 +1,12 @@
-<h1>CURRENT ISSUES</h1>
-<div class ="">
-    <% if (snippet?.length > 0) { %>
-        <% snippet.forEach(obj => { %>
-            <div class="snippetwrapper">
-            <p class="titletext"><%= obj.title %></p>
-                                
-            </div>
-        <% }) %>
-      <% } else { %>
-          <p class="no-view-snippets-text">Oh no! No snippets to display. Sign in and start creating your own!</p>
-      <% } %>
-</div>
+<h1>VIEW ISSUES</h1>
+<% if (data?.length > 0) { %>
+    <% data.forEach(obj => { %>
+        <div class="snippetwrapper">
+        <p class="titletext"><%= obj.title %></p>
+            <pre><code id="codetext" class="<%=obj.language%>"><%=obj.body%></code></pre>
+            <p id="languagetext">Language: <%=obj.language%> // Contributor: <%=obj.author%></p><br>                     
+        </div>
+    <% }) %>
+  <% } else { %>
+      <p class="no-view-snippets-text">Oh no! No snippets to display. Sign in and start creating your own!</p>
+  <% } %>

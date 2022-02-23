@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: false })) // if removed, you can't add pr
 app.use(express.static(join(directoryFullName, '..', 'public')))
 
 try {
+  app.listen(process.env.PORT)
   app.set('view engine', 'ejs')
   app.set('views', 'src/views/')
   app.use(expressLayouts)
@@ -31,18 +32,18 @@ try {
   })
 
   app.use(helmet())
-  app.use(
+  /* app.use(
     helmet.contentSecurityPolicy({
       directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
         'script-src': ["'self'", 'cdn.jsdelivr.net']
       }
     })
-  )
+  ) */
 
-  if (app.get('env') === 'production') {
+  /*  if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy
-  }
+  } */
 
   app.use('/', router)
 
