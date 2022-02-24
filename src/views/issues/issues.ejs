@@ -1,12 +1,25 @@
 <h1>VIEW ISSUES</h1>
-<p>test</p>
 <% if (data?.length > 0) { %>
-    <ol>
+    <form method="post" action="./issues">
+    <div class="issue-list-wrapper">
+
     <% data.forEach(obj => { %>
-        <li class="issuetext"><%= obj.id %><%= obj.title %></li><<br>       
+       <tr>
+          <br><th class="title-in-table"><%= obj.title %></th>
+          <%if(obj.state === 'opened') {%>
+            <button type="submit" name="<%=obj.iid%>" value="<%=obj.state%>" class="open-issue-btn">Issue open</button> 
+            <%} else {%><button type="submit" name="<%=obj.iid%>" value="<%=obj.state%>" class="closed-issue-btn">Issue closed</button> <%}%>
+            <br><span class="issue-description">ToDo: <%=obj.description%></span>
+            </td>
+       </tr>
     <% }) %>
-    </ol>
+    </div>
   <% } else { %>
       <p>Oh no! No snippets to display. Sign in and start creating your own!</p>
-  <% } %>
-  
+      <%}%>
+</form>
+  <!-- <label class="switch">
+    <input type="checkbox">
+    <span class="slider round"></span>
+  </label>
+   -->
