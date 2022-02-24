@@ -61,4 +61,4 @@ export class IssuesController {
 }
 
 // "https://gitlab.example.com/api/v4/projects/4/issues/85?state_event=close"
-      /*  'Content-type': 'application/json', */ // how to tell if it's needed? https://dmitripavlutin.com/fetch-with-json/
+/*  'Content-type': 'application/json', */ // how to tell if it's needed? https://dmitripavlutin.com/fetch-with-json/

@@ -253,15 +253,15 @@ display: inline-block;
   top: 35%;  
 }
 
-.snippet-startpage-top-text {
+.realtime-startpage-top-text {
   font-weight: bold;
-  font-size: 65px;
+  font-size: 120px;
   margin: 0;
     padding: 0;
     line-height:30px;
 }
 
-.snippet-startpage-bottom-text {
+.realtime-startpage-bottom-text {
   font-weight: bold;
   font-size: 77px;
   line-height:78px;
@@ -313,7 +313,7 @@ display: inline-block;
 }
 
 .dot {
-  margin-left: 80px;
+  margin-left: 140px;
   margin-bottom: 12px;
   height: 24px;
   width: 24px;

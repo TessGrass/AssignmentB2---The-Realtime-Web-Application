@@ -1,6 +1,7 @@
 import '../socket.io/socket.io.js'
 
 const taskTemplate = document.querySelector('#task-template')
+console.log('index.js')
 
 if (taskTemplate) {
   // Create a socket connection using Socket.IO.
