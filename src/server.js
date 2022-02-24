@@ -32,7 +32,6 @@ try {
     })
   })
 
-  app.listen(process.env.PORT)
   app.set('view engine', 'ejs')
   app.set('views', 'src/views/')
   app.use(expressLayouts)
@@ -41,6 +40,7 @@ try {
   // Pass the base URL.
   app.use((req, res, next) => {
     res.locals.baseURL = baseURL
+    res.io = io
     next()
   })
 
@@ -68,6 +68,10 @@ try {
     } else if (err.status === 500) {
       return res.status(500).render(join(directoryFullName, 'views', 'errors', '500.ejs'))
     }
+  })
+  httpServer.listen(process.env.PORT, () => {
+    console.log(`Server running at http://localhost:${process.env.PORT}`)
+    console.log('Press Ctrl-C to terminate...')
   })
 } catch (err) {
   console.error(err)
