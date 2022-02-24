@@ -25,7 +25,7 @@ if (taskTemplate) {
       const title = issueNode.querySelector('.title-in-table')
       const description = issueNode.querySelector('.issue-description')
 
-      row.setAttribute('obj-id', issue.id)
+      row.setAttribute('obj-id', issue.iid)
       title.textContent = issue.title
       description.textContent = issue.description
     }

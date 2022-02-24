@@ -17,7 +17,7 @@ const app = express()
 const directoryFullName = dirname(fileURLToPath(import.meta.url)) // Search path from C:/ to src.
 const baseURL = process.env.BASE_URL || '/'
 app.use(logger('dev'))
-app.use(express.urlencoded({ extended: false })) // if removed, you can't add products.
+app.use(express.urlencoded({ extended: false })) // if removed, you can't add products. Handels form datan
 app.use(express.json())
 app.use(express.static(join(directoryFullName, '..', 'public')))
 
@@ -62,6 +62,11 @@ try {
   app.use('/', router)
 
   app.use(function (err, req, res, next) {
+    if (req.originalUrl.includes('/webhooks')) { // it is enough to send a message to gitlab, do not need to render a view.
+      return res
+        .status(err.status || 500)
+        .end(err.message)
+    }
     if (err.status === 404) {
       return res.status(404).render(join(directoryFullName, 'views', 'errors', '404.ejs'))
     } else if (err.status === 403) {

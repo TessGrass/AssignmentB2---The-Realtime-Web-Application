@@ -18,7 +18,6 @@ export class IssuesController {
       const fetchedData = await fetch(`https://gitlab.lnu.se/api/v4/projects/${process.env.PROJECT_ID}/issues?private_token=${process.env.TOKEN}`)
       const result = await fetchedData.json()
       const data = result.map(data => ({
-
         id: `${data.id}`,
         iid: `${data.iid}`,
         title: `${data.title}`,

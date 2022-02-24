@@ -6,7 +6,7 @@
         <form method="post" action="./issues">
         <div class="issue-wrapper">
        <tr>
-        <tr obj-id="<%= obj.id %>"><%=obj.id %></tr>
+        <tr obj-id="<%= obj.iid %>"><%=obj.iid %></tr>
           <%if(obj.state === 'opened') {%>
             <button type="submit" name="state" value="<%=obj.state%>" class="open-issue-btn">Issue open</button> 
             <input type="hidden" name="id" value="<%=obj.iid%>"/>
