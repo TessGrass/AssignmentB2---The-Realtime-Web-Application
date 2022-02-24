@@ -32,14 +32,14 @@ try {
   })
 
   app.use(helmet())
-  /* app.use(
+  app.use(
     helmet.contentSecurityPolicy({
       directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
         'script-src': ["'self'", 'cdn.jsdelivr.net']
       }
     })
-  ) */
+  )
 
   /*  if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy

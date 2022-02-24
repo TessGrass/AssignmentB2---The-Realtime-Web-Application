@@ -1,25 +1,34 @@
 <h1>VIEW ISSUES</h1>
 <% if (data?.length > 0) { %>
-    <form method="post" action="./issues">
     <div class="issue-list-wrapper">
 
     <% data.forEach(obj => { %>
+        <form method="post" action="./issues">
+        <div class="issue-wrapper">
        <tr>
-          <br><th class="title-in-table"><%= obj.title %></th>
+        <tr obj-id="<%= obj.id %>"><%=obj.id %></tr>
           <%if(obj.state === 'opened') {%>
-            <button type="submit" name="<%=obj.iid%>" value="<%=obj.state%>" class="open-issue-btn">Issue open</button> 
-            <%} else {%><button type="submit" name="<%=obj.iid%>" value="<%=obj.state%>" class="closed-issue-btn">Issue closed</button> <%}%>
-            <br><span class="issue-description">ToDo: <%=obj.description%></span>
-            </td>
+            <button type="submit" name="state" value="<%=obj.state%>" class="open-issue-btn">Issue open</button> 
+            <input type="hidden" name="id" value="<%=obj.iid%>"/>
+            <%} else {%><button type="submit" name="state" value="<%=obj.state%>" class="closed-issue-btn">Issue closed</button> 
+            <input type="hidden" name="id" value="<%=obj.iid%>"/>
+            <%}%>
+            <br><th class="title-in-table"><%=obj.title %></th>
+            <br><td class="issue-description">ToDo:<%=obj.description%></td>
        </tr>
+       </div>
+    </form>
     <% }) %>
     </div>
   <% } else { %>
-      <p>Oh no! No snippets to display. Sign in and start creating your own!</p>
+      <p>Oh no! No issues to display.</p>
       <%}%>
-</form>
-  <!-- <label class="switch">
-    <input type="checkbox">
-    <span class="slider round"></span>
-  </label>
-   -->
+
+     <%# Socket.IO: Template for the client. The same as above, sort of. %>
+<template id="issue-template">
+    <tr>
+      <th class="title-in-table"></th><br>
+      <td class="issue-description"></td>
+    </tr>
+  </template>
+   

@@ -41,19 +41,22 @@ export class IssuesController {
    * @param {Function} next - Express next middleware function.
    */
   async updateState (req, res, next) {
-    const id = Object.keys(req.body)[0]
-    const state = Object.values(req.body)[0]
-    console.log(id, state)
-    let currentState = ''
+    try {
+      const { id, state } = req.body
+      console.log(id, state)
 
-    currentState = state === 'opened' ? 'close' : 'reopen'
-    const respons = await fetch(`https://gitlab.lnu.se/api/v4/projects/${process.env.PROJECT_ID}/issues/${id}?state_event=${currentState}`, {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer + ${process.env.TOKEN}`
-      }
-    })
-    console.log(respons)
+      const currentState = state === 'opened' ? 'close' : 'reopen'
+      await fetch(`https://gitlab.lnu.se/api/v4/projects/${process.env.PROJECT_ID}/issues/${id}?state_event=${currentState}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${process.env.TOKEN}`
+        }
+      })
+      res.redirect('./issues')
+    } catch (error) {
+      next(error)
+    }
   }
 }
 
