@@ -1,7 +1,7 @@
 <h1>VIEW ISSUES</h1>
+<tbody class="list-of-issue">
 <% if (data?.length > 0) { %>
     <div class="issue-list-wrapper">
-
     <% data.forEach(obj => { %>
         <form method="post" action="./issues">
         <div class="issue-wrapper">
@@ -15,9 +15,10 @@
             <%}%>
             <br><th class="title-in-table"><%=obj.title %></th>
             <br><td class="issue-description">ToDo:<%=obj.description%></td>
-       </tr>
+          </tr>
        </div>
     </form>
+    </tbody>
     <% }) %>
     </div>
   <% } else { %>

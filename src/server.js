@@ -10,6 +10,8 @@ import expressLayouts from 'express-ejs-layouts'
 import logger from 'morgan'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { createServer } from 'node:http'
+import { Server } from 'socket.io'
 import helmet from 'helmet'
 const app = express()
 const directoryFullName = dirname(fileURLToPath(import.meta.url)) // Search path from C:/ to src.
@@ -19,6 +21,17 @@ app.use(express.urlencoded({ extended: false })) // if removed, you can't add pr
 app.use(express.static(join(directoryFullName, '..', 'public')))
 
 try {
+  const httpServer = createServer(app)
+  const io = new Server(httpServer)
+
+  io.on('connection', (socket) => {
+    console.log('socket.io: a user connected')
+
+    socket.on('disconnect', () => {
+      console.log('socket.io: a user disconnected')
+    })
+  })
+
   app.listen(process.env.PORT)
   app.set('view engine', 'ejs')
   app.set('views', 'src/views/')
