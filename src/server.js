@@ -13,18 +13,22 @@ import { fileURLToPath } from 'node:url'
 import { createServer } from 'node:http'
 import { Server } from 'socket.io'
 import helmet from 'helmet'
+
 const app = express()
 const directoryFullName = dirname(fileURLToPath(import.meta.url)) // Search path from C:/ to src.
 const baseURL = process.env.BASE_URL || '/'
+
 app.use(logger('dev'))
 app.use(express.urlencoded({ extended: false })) // if removed, you can't add products. Handels form datan
-app.use(express.json())
 app.use(express.static(join(directoryFullName, '..', 'public')))
 
 try {
   const httpServer = createServer(app)
   const io = new Server(httpServer)
 
+  io.on('connect_error', (err) => {
+    console.log(`connect_error due to ${err.message}`)
+  })
   io.on('connection', (socket) => {
     console.log('socket.io: a user connected')
 
@@ -38,13 +42,6 @@ try {
   app.use(expressLayouts)
   app.set('layout', join(directoryFullName, 'views', 'layouts', 'default'))
 
-  // Pass the base URL.
-  app.use((req, res, next) => {
-    res.locals.baseURL = baseURL
-    res.io = io
-    next()
-  })
-
   app.use(helmet())
   app.use(
     helmet.contentSecurityPolicy({
@@ -55,9 +52,18 @@ try {
     })
   )
 
+  app.use(express.json())
+
   /*  if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy
   } */
+
+    // Pass the base URL.
+    app.use((req, res, next) => {
+    res.locals.baseURL = baseURL
+    res.io = io
+    next()
+  })
 
   app.use('/', router)
 

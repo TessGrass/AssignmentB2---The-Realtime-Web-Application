@@ -255,7 +255,7 @@ display: inline-block;
 
 .realtime-startpage-top-text {
   font-weight: bold;
-  font-size: 120px;
+  font-size: 80px;
   margin: 0;
     padding: 0;
     line-height:30px;
@@ -263,8 +263,8 @@ display: inline-block;
 
 .realtime-startpage-bottom-text {
   font-weight: bold;
-  font-size: 77px;
-  line-height:78px;
+  font-size: 70px;
+  line-height:95px;
   margin: 0;
     padding: 0;
 }

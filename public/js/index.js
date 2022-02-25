@@ -1,14 +1,13 @@
-import '../socket.io/socket.io.js'
-
+console.log('index.js hej')
 const issueTemplate = document.querySelector('#issue-template')
-console.log('index.js')
 
 if (issueTemplate) {
   console.log('issueTemplate')
+  await import('../socket.io/socket.io.js')
   const socket = window.io()
 
   // Listen for "tasks/create" message from the server.
-  socket.on('/issues', (data) => updateIssue(data))
+  socket.on('issues', (data) => updateIssue(data))
 
   /**
    * Update with issues.
@@ -16,10 +15,10 @@ if (issueTemplate) {
    * @param {*} data - the issue that is being add.
    */
   function updateIssue (data) {
-    console.log('insertissue')
-    const listOfIssues = document.querySelector('.list-of-issue')
-
-    if (!listOfIssues.querySelector(`[obj-id="${data.id}"]`)) {
+    console.log('updateissue')
+    const listOfIssues = document.querySelector('.list-of-issues')
+    console.log(data.iid)
+    if (listOfIssues.querySelector(`.obj-class[name="${data.iid}"]`)) {
       const issueNode = issueTemplate.content.cloneNode(true)
 
       const row = issueNode.querySelector('tr')

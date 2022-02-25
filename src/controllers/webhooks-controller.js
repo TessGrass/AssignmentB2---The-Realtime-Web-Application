@@ -35,7 +35,6 @@ export class WebhooksController {
       let data = null
       if (req.body.event_type === 'issue') {
         data = {
-          id: req.body.object_attributes.id,
           iid: req.body.object_attributes.iid,
           title: req.body.object_attributes.title,
           description: req.body.object_attributes.description,
