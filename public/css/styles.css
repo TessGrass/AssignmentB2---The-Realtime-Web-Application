@@ -21,27 +21,6 @@ body > footer {
     /* background-color: rgb(187, 245, 221); */
 }
 
-/* .button-signup-login {
-  border: none;
-  color: #090909;
-  padding: 0.7em 1.7em;
-  font-size: 14px;
-  border-radius: 0.5em;
-  background: #e8e8e8;
-  border: 1px solid #e8e8e8;
-  transition: all .3s;
-  box-shadow: 6px 6px 12px #c5c5c5,
-              -6px -6px 12px #ffffff;
- }
- .button-signup-login:hover {
-  background-color: rgb(170, 240, 217);
- }
- 
- .button-signup-login:active {
-  color: rgb(204, 199, 199);
-  box-shadow: inset 4px 4px 4px #c5c5c5,
-              inset -4px -4px 4px #ffffff;
- } */
 
 .footer-text {
   font-weight: 200;
@@ -59,12 +38,6 @@ hr {
 
 h1 {
   margin-left: 15px
-}
-
-h2 {
-  font-size: 20px;
-  padding-bottom: 25px;
-  margin-left: 15px;
 }
 
 .container {
@@ -117,88 +90,17 @@ input {
   padding: 10px;
 }
 
-p {
-  margin-top: 2px;
-  margin-bottom: 0;
-}
-
-.delete-btn {
-padding: 0;
-background: white;
-}
 
 @keyframes fadeIn {
   0% {opacity:0;}
   100% {opacity:1;}
 }
 
-.account-startpage {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  margin-left: 15px;
-}
-
-/* .create-snippet-wrapper{
-  margin-right: 60px;
-} */
-
-/* .snippet-title {
-  margin-top: 0;
-  padding-top: 0;
-} */
-
-/* #input-author-name {
-  padding: 1px;
-} */
-
-/* table {
-  table-layout: fixed;
-  vertical-align: bottom;
-  width: 60%;
-}
-
-.title-in-table {
-  width: 15%;
-}
-
-.body-in-table {
-  width: 35%;
-}
-
-.update-in-table {
-  width: 8%;
-}
-
-.delete-btn-in-table {
-  margin-left: 5px;
-  width: 8%;
-}
-
-th, td {
-  border-bottom: 1px solid rgb(136, 129, 129);
-}
-
-tr:hover {
-  background-color: rgb(170, 240, 217);
-} */
-
 .snippetwrapper {
   display: inline-block;
   margin-bottom: 1px;
 }
 
-/* .snippetwrapper > pre {
-  display: inline-block;
-  width: 300px;
-  background: #333333;
-  color: rgb(255, 255, 255);
-  padding: 10px;
-  margin-top: 0px;
-  margin-right: 35px;
-  margin-bottom: 0px;
-  margin-left: 10px;
-   */
 
 .snippetpage {
   height: 700px;
@@ -208,42 +110,6 @@ tr:hover {
 	justify-content: flex-start;
 	align-items: stretch;
 	align-content: flex-start;
-}
-
-/* .titletext {
-  margin-left: 10px;
-  padding-top: 8px;
-  padding-bottom: 0;
-  width: fit-content;
-} */
-
-/* code {
-display: inline-block;
-  white-space: pre-line;
-  max-width:100%; 
-} */
-
-#codetext {
-  font-family: 'Roboto Mono';
-  font-size: 11px;
-}
-
-.authortext {
-  display: inline;
-  margin-left: 10px;
-  padding-top: 0px;
-  font-size: 10px;
-}
-
-#languagetext {
-  margin-left: 10px;
-  padding-top: 0px;
-  font-size: 10px;
-}
-
-.language-tag {
-  padding: 5px;
-  margin-bottom: 5px;
 }
 
 .startpage {
@@ -281,29 +147,6 @@ display: inline-block;
     padding: 0;    
 }
 
-/* .signup-page, .login-page {
-  text-align: center;
-  justify-content: center;
-  margin-top: 250px;
-}
-
-.signup-page > form {
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-}
-
-.login-page > form {
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-} */
-
-/* .signup-page-text, .login-page-text {
-  font-size: 30px;
-  padding-bottom: 15px;
-  margin: 0 auto;
-} */
 
 .dot-container {
   background: yellow;
@@ -331,50 +174,11 @@ display: inline-block;
   }
 }
 
-form {
-  display: table;
-}
 
 input {
   display: table-cell;
   width: 200px;
 }
-
-/* #signup:invalid {
-  outline: solid 2px red;
-}
-
-
-.alert--success {
-  text-align: center;
-  margin:0 auto;
-  background: rgb(170, 240, 217);
-  border-color: #77e993;
-  width: 60%;
-  height: 30px;
-  color: rgb(66, 140, 115);
-  animation: fadeIn 0.5s linear;
-  animation-iteration-count: 1;
-  animation-direction: alternate;
-}
-
-.alert--danger {
-  text-align: center;
-  margin:0 auto;
-  background: #f75353;
-  border-color: #f86a6a;
-  width: 60%;
-  height: 30px;
-  color: #4d0000;
-  animation: fadeIn 0.5s linear;
-  animation-iteration-count: 1;
-  animation-direction: alternate;
-}
-
-@keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
-} */
 
 .error {
   margin-top: 6em;
@@ -400,23 +204,6 @@ input {
   font-size: 22px;
 }
 
-.author-create {
-  font-size: 12px;
-  margin-bottom: 10px;
-  margin-top: 0px;
-}
-
-/* .update-snippet-h1 {
-  margin-top: 40px;
-}
-
-.snippet-update-wrapper {
-  margin-left: 15px;
-}
-
-.btn-update-snippet {
-  margin-left: 15px;
-} */
 
 .child-of-issue-list-wrapper {
   margin-top: 10px;
@@ -424,15 +211,14 @@ input {
 
 .issue-description {
   font-size: 10px;
-  margin-left: 1em;
+  padding-bottom: 15px;
 }
 
 .issue-wrapper {
-  width: 300px;
+  max-width: 25rem;
   margin-bottom: 10px;
   margin-left: 15px;
   padding-left: 5px;
-  padding-bottom: 20px;
   background-color: rgb(200, 222, 233);
 }
 
@@ -451,6 +237,15 @@ span {
   font-size: 30px;
 }
 
+.obj-class {
+  font-size: 5px;
+  color: red;
+}
+.title-in-issue {
+  font-size: 15px;
+  margin: 0px;
+  color: black;
+}
 
 
 /* The switch - the box around the slider */

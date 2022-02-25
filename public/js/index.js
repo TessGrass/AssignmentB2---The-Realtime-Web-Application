@@ -15,19 +15,20 @@ if (issueTemplate) {
    * @param {*} data - the issue that is being add.
    */
   function updateIssue (data) {
-    console.log('updateissue')
-    const listOfIssues = document.querySelector('.list-of-issues')
-    console.log(data.iid)
-    if (listOfIssues.querySelector(`.obj-class[name="${data.iid}"]`)) {
-      const issueNode = issueTemplate.content.cloneNode(true)
+    const template = document.querySelector('#issue-template').content.cloneNode(true)
+    // const listOfIssues = document.querySelector('.list-of-issues')
+    // listOfIssues.querySelector(`.obj-class[name="${data.iid}"]`)
+    /* const issueNode = issueTemplate.content.cloneNode(true) */
 
-      const row = issueNode.querySelector('tr')
-      const title = issueNode.querySelector('.title-in-table')
-      const description = issueNode.querySelector('.issue-description')
+    const title = template.querySelector('.title-in-table')
+    const description = template.querySelector('.issue-description')
 
-      row.setAttribute('obj-id', data.iid)
-      title.textContent = data.title
-      description.textContent = data.description
-    }
+    title.textContent = data.title
+    description.textContent = data.description
   }
 }
+
+ /*  <tr class="obj-class"></tr>
+  <th class="title-in-table"></th><br>
+  <td class="issue-description"></td>
+ */

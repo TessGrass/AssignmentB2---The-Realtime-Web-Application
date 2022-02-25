@@ -23,9 +23,9 @@ export class IssuesController {
         title: `${data.title}`,
         description: `${data.description}`,
         author: `${data.author.name}`,
+        avatar: `${data.author.avatar_url}`,
         state: `${data.state}`
       }))
-
       res.render('../views/issues/issues', { data })
     } catch (error) {
       next(error)

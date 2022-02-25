@@ -42,12 +42,21 @@ try {
   app.use(expressLayouts)
   app.set('layout', join(directoryFullName, 'views', 'layouts', 'default'))
 
+  // app.use(helmet())
+  /* app.use(
+    helmet({
+      crossOriginEmbedderPolicy: false
+    })
+  ) */
+  
   app.use(helmet())
   app.use(
-    helmet.contentSecurityPolicy({
-      directives: {
-        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        'script-src': ["'self'", 'cdn.jsdelivr.net']
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          'img-src': ["'self'", '*.gravatar.com']
+        }
       }
     })
   )
