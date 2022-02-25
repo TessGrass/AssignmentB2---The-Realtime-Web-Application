@@ -13,15 +13,48 @@ import { fileURLToPath } from 'node:url'
 import { createServer } from 'node:http'
 import { Server } from 'socket.io'
 import helmet from 'helmet'
-
 const app = express()
 const directoryFullName = dirname(fileURLToPath(import.meta.url)) // Search path from C:/ to src.
 const baseURL = process.env.BASE_URL || '/'
+// app.use(helmet())
+// app.use(helmet({ crossOriginEmbedderPolicy: false }))
+/* app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        'img-src': ["'self'", 'gitlab.lnu.se', 'https://secure.gravatar.com/']
+      }
+    },
+    crossOriginEmbedderPolicy: true,
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    crossOriginOpenerPolicy: { policy: 'same-origin' }
+
+  })
+) */
+
+app.use(helmet({ crossOriginEmbedderPolicy: false }))
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    imgSrc: ["'self'", 'gitlab.lnu.se', 'secure.gravatar.com']
+  }
+})
+)
 
 app.use(logger('dev'))
-app.use(express.urlencoded({ extended: false })) // if removed, you can't add products. Handels form datan
+
+app.set('view engine', 'ejs')
+app.set('views', 'src/views/')
+app.use(expressLayouts)
+app.set('layout', join(directoryFullName, 'views', 'layouts', 'default'))
+
+app.use(express.urlencoded({ extended: false })) // if removed, you can't add products. Handles form data
 app.use(express.static(join(directoryFullName, '..', 'public')))
 
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1) // trust first proxy
+}
+app.use(express.json())
 try {
   const httpServer = createServer(app)
   const io = new Server(httpServer)
@@ -37,35 +70,13 @@ try {
     })
   })
 
-  app.set('view engine', 'ejs')
-  app.set('views', 'src/views/')
-  app.use(expressLayouts)
-  app.set('layout', join(directoryFullName, 'views', 'layouts', 'default'))
-
   // app.use(helmet())
   /* app.use(
     helmet({
       crossOriginEmbedderPolicy: false
     })
   ) */
-  
-  app.use(helmet())
-  app.use(
-    helmet({
-      contentSecurityPolicy: {
-        directives: {
-          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-          'img-src': ["'self'", '*.gravatar.com']
-        }
-      }
-    })
-  )
 
-  app.use(express.json())
-
-  /*  if (app.get('env') === 'production') {
-    app.set('trust proxy', 1) // trust first proxy
-  } */
 
     // Pass the base URL.
     app.use((req, res, next) => {
@@ -75,6 +86,7 @@ try {
   })
 
   app.use('/', router)
+
 
   app.use(function (err, req, res, next) {
     if (req.originalUrl.includes('/webhooks')) { // it is enough to send a message to gitlab, do not need to render a view.

@@ -1,6 +1,7 @@
 <h1>VIEW ISSUES</h1>
 
 <% if (data?.length > 0) { %>
+    <p class="test"></p>
     <div class="issue-list-wrapper">
     <% data.forEach(obj => { %>
         <form method="post" action="./issues">
@@ -12,20 +13,25 @@
             <input type="hidden" name="id" value="<%=obj.iid%>"/>
             <%}%>
            
-            <p class="title-in-issue">#<%=obj.iid%>. <%=obj.title %>
+            <p class="title-in-issue">#<%=obj.iid%>. <%=obj.title %></p>
             <br><p class="issue-description">ToDo:<%=obj.description%></p>
+            <img src="<%=obj.avatar%> alt="Gravatar on Gitlab" width="50" height="50"><%console.log(obj.avatar)%>
+
+            
        </div>
     </form>
-    
     <% }) %>
     </div>
   <% } else { %>
       <p>Oh no! No issues to display.</p>
       <%}%>
-
      <%# Socket.IO: Template for the client. The same as above, sort of. %>
 <template id="issue-template">
+    <button type="submit" name="state" value="" class="open-issue-btn">Issue open</button>
+    <input type="hidden" name="id" value=""/>
+    <button type="submit" name="state" value="" class="closed-issue-btn">Issue closed</button> 
       <p class="title-in-issue"></p><br>
       <p class="issue-description"></p>
+      <p class="test"></p>
 </template>
    
