@@ -23,7 +23,8 @@ export class WebhooksController {
   }
 
   /**
-   * 
+   * Get the data from webhook.
+   *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
@@ -40,16 +41,18 @@ export class WebhooksController {
           description: req.body.object_attributes.description,
           state: req.body.object_attributes.state
         }
-        console.log('index webhooks')
       }
-
       // It is important to respond quickly!
       res.status(200).end()
 
       // Put this last because socket communication can take long time.
       if (data) {
         console.log('emit')
-        res.io.emit('issues', data)
+        if (req.body.changes.updated_at.previous === null) {
+          res.io.emit('newIssue', data)
+        } else {
+          res.io.emit('issues', data)
+        }
       }
     } catch (error) {
       const err = new Error('Internal Server Error')

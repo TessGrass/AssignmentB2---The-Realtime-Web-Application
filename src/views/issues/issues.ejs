@@ -1,37 +1,35 @@
 <h1>VIEW ISSUES</h1>
-
+<div class="bodywrapper">
 <% if (data?.length > 0) { %>
-    <p class="test"></p>
-    <div class="issue-list-wrapper">
     <% data.forEach(obj => { %>
-        <form method="post" action="./issues">
-        <div class="issue-wrapper">
+        <form method="post" id="<%=obj.iid%>" action="./issues">
+        <div class="issue-wrapper" id="<%=obj.iid%>">
           <%if(obj.state === 'opened') {%>
-            <button type="submit" name="state" value="<%=obj.state%>" class="open-issue-btn">Issue open</button> 
+            <button type="submit" name="state" value="<%=obj.state%>" class="open-issue-btn">opened</button> 
             <input type="hidden" name="id" value="<%=obj.iid%>"/>
-            <%} else {%><button type="submit" name="state" value="<%=obj.state%>" class="closed-issue-btn">Issue closed</button> 
+            <%} else {%><button type="submit" name="state" value="<%=obj.state%>" class="closed-issue-btn">closed</button> 
             <input type="hidden" name="id" value="<%=obj.iid%>"/>
-            <%}%>
-           
+            <%}%>            
             <p class="title-in-issue">#<%=obj.iid%>. <%=obj.title %></p>
-            <br><p class="issue-description">ToDo:<%=obj.description%></p>
-            <img src="<%=obj.avatar%> alt="Gravatar on Gitlab" width="50" height="50"><%console.log(obj.avatar)%>
-
-            
+            <br><p class="issue-description"><%=obj.description%></p>
+            <img src="<%=obj.avatar%>" id="img-right" crossorigin>
+            <p class="author"><%=obj.author%></p>
        </div>
     </form>
     <% }) %>
-    </div>
   <% } else { %>
       <p>Oh no! No issues to display.</p>
       <%}%>
+  </div>
      <%# Socket.IO: Template for the client. The same as above, sort of. %>
 <template id="issue-template">
-    <button type="submit" name="state" value="" class="open-issue-btn">Issue open</button>
+    <form method="post" id="" action="./issues">
+    <button type="submit" name="state" value="" class="open-issue-btn">opened</button>
     <input type="hidden" name="id" value=""/>
-    <button type="submit" name="state" value="" class="closed-issue-btn">Issue closed</button> 
+  <button type="submit" name="state" value="" class="closed-issue-btn">closed</button>
       <p class="title-in-issue"></p><br>
       <p class="issue-description"></p>
-      <p class="test"></p>
+      <img src="" id="img-right" crossorigin>
+      </form>
 </template>
    

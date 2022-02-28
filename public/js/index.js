@@ -1,5 +1,4 @@
 
-console.log('index.js hej')
 const issueTemplate = document.querySelector('#issue-template')
 
 if (issueTemplate) {
@@ -11,9 +10,9 @@ if (issueTemplate) {
     : '/socket.io'
   const socket = window.io.connect('/', { path })
 
-
-  // Listen for "tasks/create" message from the server.
+  // Listen for message from the server.
   socket.on('issues', (data) => updateIssue(data))
+  socket.on('newIssue', (data) => newIssue(data))
 
   /**
    * Update with issues.
@@ -21,19 +20,74 @@ if (issueTemplate) {
    * @param {*} data - the issue that is being add.
    */
   function updateIssue (data) {
-    const openButton = document.querySelector('.open-issue-btn')
-    const closedButton = document.querySelector('.closed-issue-btn')
+    console.log('updateIssue')
+    const issue = document.querySelector(`[id="${data.iid}"]`)
+    const button = issue.querySelector('button')
+
     console.log(data.state)
+    if (data.state === 'opened') {
+      button.removeAttribute('class', 'closed-issue-btn')
+      button.classList.add('open-issue-btn')
+      button.textContent = 'opened'
+    } else {
+      button.removeAttribute('class', 'open-issue-btn')
+      button.classList.add('closed-issue-btn')
+      button.textContent = 'closed'
+    }
+  }
+  /**
+   * Creates a new issue.
+   *
+   * @param {object} data  - the data in the new issue.
+   */
+  function newIssue (data) {
+    console.log(data)
+    console.log('newIssue')
+    const template = document.querySelector('#issue-template').content.cloneNode(true)
+    const wrapper = document.createElement('div')
+    wrapper.setAttribute('class', 'issue-wrapper')
+    /* wrapper.setAttribute([`[id="${data.iid}"]`) */
+    wrapper.setAttribute('id', `${data.iid}`)
+    const title = template.querySelector('.title-in-issue')
+    const desc = template.querySelector('.issue-description')
+    const bodywrapper = document.querySelector('.bodywrapper')
+    const form = template.querySelector('form')
+    const button = template.querySelector('button')
+    form.setAttribute('id', `${data.iid}`)
+    // const img = template.querySelector('#img-right')
+    /* const issue = document.querySelector(`[id="${data.iid}"]`) */
 
     if (data.state === 'opened') {
-      openButton.textContent = 'rövhatt'
+      button.className('class', 'open-issue-btn')
     } else {
-      console.log('closed')
-      closedButton.textContent = 'gorilla'
+      button.setAttribute('class', 'closed-issue-btn')
     }
-    console.log(closedButton)
-    console.log(openButton)
-   
+    button.setAttribute('value', `${data.state}`)
+    title.textContent = data.title
+    desc.textContent = data.description
+    wrapper.append(form, button, title, desc)
+    bodywrapper.appendChild(wrapper)
+  }
+
+    /*  button.removeAttribute('class', 'closed-issue-btn')
+    button.value = data.state
+    button.classList.add('open-issue-btn')
+    button.textContent = 'opened'
+    console.log(button)
+    console.log('............') */
+
+    /*  if (data.state === 'opened') {
+      console.log('öppen')
+      button.setAttribute = ('class', '.open-issue-btn')
+      button.textContent = 'öppen'
+
+      console.log(button)
+    } else {
+      button.setAttribute = ('class', '.closed-issue-btn')
+      button.textContent = 'stängd'
+      console.log(button)
+    } */
+
    /*  const template = document.querySelector('#issue-template').content.cloneNode(true) */
     // const listOfIssues = document.querySelector('.list-of-issues')
     // listOfIssues.querySelector(`.obj-class[name="${data.iid}"]`)
@@ -47,7 +101,6 @@ if (issueTemplate) {
     description.Textcontent = data.description
     test.textContent = data.title */
   }
-}
 
  /*  <tr class="obj-class"></tr>
   <th class="title-in-table"></th><br>

@@ -13,33 +13,57 @@ import { fileURLToPath } from 'node:url'
 import { createServer } from 'node:http'
 import { Server } from 'socket.io'
 import helmet from 'helmet'
+// import cors from 'cors'
 const app = express()
 const directoryFullName = dirname(fileURLToPath(import.meta.url)) // Search path from C:/ to src.
 const baseURL = process.env.BASE_URL || '/'
+
+app.use(helmet({ crossOriginEmbedderPolicy: true }))
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    imgSrc: ["'self'", 'secure.gravatar.com']
+  }
+})
+)
 // app.use(helmet())
 // app.use(helmet({ crossOriginEmbedderPolicy: false }))
-/* app.use(
+/* const crossorigin = true
+app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        'img-src': ["'self'", 'gitlab.lnu.se', 'https://secure.gravatar.com/']
+        'img-src': ["'self'", 'secure.gravatar.com', crossorigin]
       }
-    },
-    crossOriginEmbedderPolicy: true,
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
-    crossOriginOpenerPolicy: { policy: 'same-origin' }
-
+    }
   })
 ) */
-
+/*
+app.use(helmet())
 app.use(helmet({ crossOriginEmbedderPolicy: false }))
+app.use(helmet({ crossOriginResourcePolicy: true })) */
+
+// Sets "Cross-Origin-Resource-Policy: same-site"
+/* app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }))
+
 app.use(helmet.contentSecurityPolicy({
   directives: {
-    imgSrc: ["'self'", 'gitlab.lnu.se', 'secure.gravatar.com']
+    ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+    'script-src': ["'self'", 'code.jquery.com', 'cdn.jsdelivr.net', "'unsafe-eval'"],
+        'img-src': ["'self'", 'gitlab.lnu.se', '*.gravatar.com'],
+        'default-src': ["'self'"],
+        'connect-src': ["'self'"]
+
   }
 })
-)
+) */
+/* imgSrc: ["'self'", 'gitlab.lnu.se', '*.gravatar.com'] */
+/* app.use(cors())
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+}) */
 
 app.use(logger('dev'))
 
@@ -70,23 +94,14 @@ try {
     })
   })
 
-  // app.use(helmet())
-  /* app.use(
-    helmet({
-      crossOriginEmbedderPolicy: false
-    })
-  ) */
-
-
-    // Pass the base URL.
-    app.use((req, res, next) => {
+  // Pass the base URL.
+  app.use((req, res, next) => {
     res.locals.baseURL = baseURL
     res.io = io
     next()
   })
 
   app.use('/', router)
-
 
   app.use(function (err, req, res, next) {
     if (req.originalUrl.includes('/webhooks')) { // it is enough to send a message to gitlab, do not need to render a view.
