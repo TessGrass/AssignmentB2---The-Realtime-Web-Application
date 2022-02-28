@@ -34,12 +34,15 @@ export class WebhooksController {
       // Only interested in issues events. (But still, respond with a 200
       // for events not supported.)
       let data = null
+      console.log(req.body)
       if (req.body.event_type === 'issue') {
         data = {
           iid: req.body.object_attributes.iid,
           title: req.body.object_attributes.title,
           description: req.body.object_attributes.description,
-          state: req.body.object_attributes.state
+          state: req.body.object_attributes.state,
+          author: req.body.user.name,
+          avatar: req.body.user.avatar_url
         }
       }
       // It is important to respond quickly!

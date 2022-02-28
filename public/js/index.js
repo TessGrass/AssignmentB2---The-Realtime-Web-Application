@@ -44,29 +44,39 @@ if (issueTemplate) {
     console.log(data)
     console.log('newIssue')
     const template = document.querySelector('#issue-template').content.cloneNode(true)
-    const wrapper = document.createElement('div')
-    wrapper.setAttribute('class', 'issue-wrapper')
+    const bodywrapper = document.querySelector('.bodywrapper')
+    template.querySelector('.issue-wrapper').setAttribute('id', `${data.iid}`)
+    template.querySelector('form').setAttribute('id', `${data.iid}`)
+    template.querySelector('.title-in-issue').textContent = '#' + data.iid + data.title
+    template.querySelector('.issue-description').textContent = data.description
+    template.querySelector('img').src = data.avatar
+    template.querySelector('.author').textContent = data.author
+    bodywrapper.append(template)
+
+
     /* wrapper.setAttribute([`[id="${data.iid}"]`) */
-    wrapper.setAttribute('id', `${data.iid}`)
+    /* wrapper.setAttribute('id', `${data.iid}`)
     const title = template.querySelector('.title-in-issue')
     const desc = template.querySelector('.issue-description')
     const bodywrapper = document.querySelector('.bodywrapper')
     const form = template.querySelector('form')
     const button = template.querySelector('button')
-    form.setAttribute('id', `${data.iid}`)
+    form.setAttribute('id', `${data.iid}`) */
     // const img = template.querySelector('#img-right')
     /* const issue = document.querySelector(`[id="${data.iid}"]`) */
 
-    if (data.state === 'opened') {
-      button.className('class', 'open-issue-btn')
-    } else {
-      button.setAttribute('class', 'closed-issue-btn')
+    /* if (data.state === 'opened') {
+      button.className = 'open-issue-btn'
+    } else { */
+      /* button.setAttribute('class', 'closed-issue-btn') */
+   /*    console.log('ghfgh')
     }
     button.setAttribute('value', `${data.state}`)
     title.textContent = data.title
     desc.textContent = data.description
-    wrapper.append(form, button, title, desc)
-    bodywrapper.appendChild(wrapper)
+    form.append(button)
+    wrapper.appendChild(form, title, desc)
+    bodywrapper.appendChild(wrapper) */
   }
 
     /*  button.removeAttribute('class', 'closed-issue-btn')

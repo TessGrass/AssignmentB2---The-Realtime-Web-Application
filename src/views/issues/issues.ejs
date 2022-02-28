@@ -18,18 +18,22 @@
     </form>
     <% }) %>
   <% } else { %>
-      <p>Oh no! No issues to display.</p>
+      <p class="no-issues">Oh no! No issues to display.</p>
       <%}%>
   </div>
      <%# Socket.IO: Template for the client. The same as above, sort of. %>
+     <div class="bodywrapper">
 <template id="issue-template">
     <form method="post" id="" action="./issues">
+        <div class="issue-wrapper" id="">
     <button type="submit" name="state" value="" class="open-issue-btn">opened</button>
     <input type="hidden" name="id" value=""/>
-  <button type="submit" name="state" value="" class="closed-issue-btn">closed</button>
       <p class="title-in-issue"></p><br>
       <p class="issue-description"></p>
       <img src="" id="img-right" crossorigin>
+      <p class="author"></p>
+    </div>
       </form>
 </template>
+</div>
    
