@@ -47,11 +47,17 @@ if (issueTemplate) {
     const bodywrapper = document.querySelector('.bodywrapper')
     template.querySelector('.issue-wrapper').setAttribute('id', `${data.iid}`)
     template.querySelector('form').setAttribute('id', `${data.iid}`)
-    template.querySelector('.title-in-issue').textContent = '#' + data.iid + data.title
+    template.querySelector('.title-in-issue').textContent = `# ${data.iid}. ${data.title}`
     template.querySelector('.issue-description').textContent = data.description
     template.querySelector('img').src = data.avatar
     template.querySelector('.author').textContent = data.author
-    bodywrapper.append(template)
+    template.querySelector('input').setAttribute('name', 'id')
+    template.querySelector('input').setAttribute('value', `${data.iid}`)
+    template.querySelector('button').setAttribute('class', 'open-issue-btn')
+    template.querySelector('button').setAttribute('value', `${data.state}`)
+    template.querySelector('button').textContent = 'opened'
+
+    bodywrapper.insertBefore(template, bodywrapper.firstElementChild)
 
 
     /* wrapper.setAttribute([`[id="${data.iid}"]`) */
