@@ -15,7 +15,7 @@ if (issueTemplate) {
   socket.on('newIssue', (data) => newIssue(data))
 
   /**
-   * Update with issues.
+   * Update the issue.
    *
    * @param {*} data - the issue that is being add.
    */
@@ -41,7 +41,6 @@ if (issueTemplate) {
    * @param {object} data  - the data in the new issue.
    */
   function newIssue (data) {
-    console.log(data)
     console.log('newIssue')
     const template = document.querySelector('#issue-template').content.cloneNode(true)
     const bodywrapper = document.querySelector('.bodywrapper')
@@ -58,67 +57,5 @@ if (issueTemplate) {
     template.querySelector('button').textContent = 'opened'
 
     bodywrapper.insertBefore(template, bodywrapper.firstElementChild)
-
-
-    /* wrapper.setAttribute([`[id="${data.iid}"]`) */
-    /* wrapper.setAttribute('id', `${data.iid}`)
-    const title = template.querySelector('.title-in-issue')
-    const desc = template.querySelector('.issue-description')
-    const bodywrapper = document.querySelector('.bodywrapper')
-    const form = template.querySelector('form')
-    const button = template.querySelector('button')
-    form.setAttribute('id', `${data.iid}`) */
-    // const img = template.querySelector('#img-right')
-    /* const issue = document.querySelector(`[id="${data.iid}"]`) */
-
-    /* if (data.state === 'opened') {
-      button.className = 'open-issue-btn'
-    } else { */
-      /* button.setAttribute('class', 'closed-issue-btn') */
-   /*    console.log('ghfgh')
-    }
-    button.setAttribute('value', `${data.state}`)
-    title.textContent = data.title
-    desc.textContent = data.description
-    form.append(button)
-    wrapper.appendChild(form, title, desc)
-    bodywrapper.appendChild(wrapper) */
   }
-
-    /*  button.removeAttribute('class', 'closed-issue-btn')
-    button.value = data.state
-    button.classList.add('open-issue-btn')
-    button.textContent = 'opened'
-    console.log(button)
-    console.log('............') */
-
-    /*  if (data.state === 'opened') {
-      console.log('öppen')
-      button.setAttribute = ('class', '.open-issue-btn')
-      button.textContent = 'öppen'
-
-      console.log(button)
-    } else {
-      button.setAttribute = ('class', '.closed-issue-btn')
-      button.textContent = 'stängd'
-      console.log(button)
-    } */
-
-   /*  const template = document.querySelector('#issue-template').content.cloneNode(true) */
-    // const listOfIssues = document.querySelector('.list-of-issues')
-    // listOfIssues.querySelector(`.obj-class[name="${data.iid}"]`)
-    /* const issueNode = issueTemplate.content.cloneNode(true) */
-
-   /*  const title = template.querySelector('.title-in-table')
-    const description = template.querySelector('.issue-description')
-    const test = template.querySelector('.test')
-
-    title.textContent = data.title
-    description.Textcontent = data.description
-    test.textContent = data.title */
-  }
-
- /*  <tr class="obj-class"></tr>
-  <th class="title-in-table"></th><br>
-  <td class="issue-description"></td>
- */
+}

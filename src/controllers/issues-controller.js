@@ -14,7 +14,6 @@ export class IssuesController {
    */
   async index (req, res, next) {
     try {
-      console.log('index issues-controller')
       const fetchedData = await fetch(`https://gitlab.lnu.se/api/v4/projects/${process.env.PROJECT_ID}/issues?private_token=${process.env.TOKEN}`)
       const result = await fetchedData.json()
       const data = result.map(data => ({
@@ -26,11 +25,15 @@ export class IssuesController {
         avatar: `${data.author.avatar_url}`,
         state: `${data.state}`
       }))
+
+      const count = Object.keys(data).length
+      console.log(count)
       res.render('../views/issues/issues', { data })
     } catch (error) {
       next(error)
     }
   }
+
 
   /**
    * Updates the state of a specific issue.
@@ -58,6 +61,7 @@ export class IssuesController {
     }
   }
 }
+
 
 // "https://gitlab.example.com/api/v4/projects/4/issues/85?state_event=close"
 /*  'Content-type': 'application/json', */ // how to tell if it's needed? https://dmitripavlutin.com/fetch-with-json/

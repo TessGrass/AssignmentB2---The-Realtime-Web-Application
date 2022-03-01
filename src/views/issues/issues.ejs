@@ -1,7 +1,7 @@
-<h1>VIEW ISSUES</h1>
+
 <div class="bodywrapper">
 <% if (data?.length > 0) { %>
-    <% data.forEach(obj => { %>
+    <% data.forEach(obj => { %>       
         <form method="post" id="<%=obj.iid%>" action="./issues">
         <div class="issue-wrapper" id="<%=obj.iid%>">
           <%if(obj.state === 'opened') {%>
@@ -11,8 +11,8 @@
             <input type="hidden" name="id" value="<%=obj.iid%>"/>
             <%}%>            
             <p class="title-in-issue">#<%=obj.iid%>. <%=obj.title %></p>
-            <br><p class="issue-description"><%=obj.description%></p>
-            <img src="<%=obj.avatar%>" id="img-right" crossorigin>
+            <p class="issue-description"><%=obj.description%></p>
+            <img src="<%=obj.avatar%>" id="img-right" crossorigin><br>
             <p class="author"><%=obj.author%></p>
        </div>
     </form>
@@ -20,6 +20,9 @@
   <% } else { %>
       <p class="no-issues">Oh no! No issues to display.</p>
       <%}%>
+  </div>
+  <div class="w3-light-grey">
+    <div class="w3-container" style="width:25%" background: red;></div>
   </div>
      <%# Socket.IO: Template for the client. The same as above, sort of. %>
      <div class="bodywrapper">

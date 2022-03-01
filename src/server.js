@@ -18,68 +18,27 @@ const app = express()
 const directoryFullName = dirname(fileURLToPath(import.meta.url)) // Search path from C:/ to src.
 const baseURL = process.env.BASE_URL || '/'
 
-app.use(helmet({ crossOriginEmbedderPolicy: true }))
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    imgSrc: ["'self'", 'secure.gravatar.com']
-  }
-})
-)
-// app.use(helmet())
-// app.use(helmet({ crossOriginEmbedderPolicy: false }))
-/* const crossorigin = true
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        'img-src': ["'self'", 'secure.gravatar.com', crossorigin]
-      }
+try {
+  app.use(helmet({ crossOriginEmbedderPolicy: true }))
+  app.use(helmet.contentSecurityPolicy({
+    directives: {
+      imgSrc: ["'self'", 'secure.gravatar.com']
     }
   })
-) */
-/*
-app.use(helmet())
-app.use(helmet({ crossOriginEmbedderPolicy: false }))
-app.use(helmet({ crossOriginResourcePolicy: true })) */
+  )
+  app.use(logger('dev'))
+  app.set('view engine', 'ejs')
+  app.set('views', 'src/views/')
+  app.use(expressLayouts)
+  app.set('layout', join(directoryFullName, 'views', 'layouts', 'default'))
+  app.use(express.urlencoded({ extended: false })) // if removed, you can't add products. Handles form data
+  app.use(express.static(join(directoryFullName, '..', 'public')))
 
-// Sets "Cross-Origin-Resource-Policy: same-site"
-/* app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }))
-
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-    'script-src': ["'self'", 'code.jquery.com', 'cdn.jsdelivr.net', "'unsafe-eval'"],
-        'img-src': ["'self'", 'gitlab.lnu.se', '*.gravatar.com'],
-        'default-src': ["'self'"],
-        'connect-src': ["'self'"]
-
+  if (app.get('env') === 'production') {
+    app.set('trust proxy', 1) // trust first proxy
   }
-})
-) */
-/* imgSrc: ["'self'", 'gitlab.lnu.se', '*.gravatar.com'] */
-/* app.use(cors())
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-  next()
-}) */
+  app.use(express.json())
 
-app.use(logger('dev'))
-
-app.set('view engine', 'ejs')
-app.set('views', 'src/views/')
-app.use(expressLayouts)
-app.set('layout', join(directoryFullName, 'views', 'layouts', 'default'))
-
-app.use(express.urlencoded({ extended: false })) // if removed, you can't add products. Handles form data
-app.use(express.static(join(directoryFullName, '..', 'public')))
-
-if (app.get('env') === 'production') {
-  app.set('trust proxy', 1) // trust first proxy
-}
-app.use(express.json())
-try {
   const httpServer = createServer(app)
   const io = new Server(httpServer)
 
