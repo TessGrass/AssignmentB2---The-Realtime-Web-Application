@@ -3,7 +3,6 @@ const issueTemplate = document.querySelector('#issue-template')
 
 if (issueTemplate) {
   await import('../socket.io/socket.io.js')
-  console.log('issueTemplate')
   const base = document.querySelector('base')
   const path = base
     ? (new URL('socket.io', base.href)).pathname
@@ -17,10 +16,9 @@ if (issueTemplate) {
   /**
    * Update the issue.
    *
-   * @param {*} data - the issue that is being add.
+   * @param {object} data - the issue that is being add.
    */
   function updateIssue (data) {
-    console.log('updateIssue')
     const issue = document.querySelector(`[id="${data.iid}"]`)
     const button = issue.querySelector('button')
 
@@ -34,6 +32,10 @@ if (issueTemplate) {
       button.classList.add('closed-issue-btn')
       button.textContent = 'closed'
     }
+
+    issue.querySelector('.title-in-issue').textContent = `# ${data.iid}. ${data.title}`
+    issue.querySelector('.issue-description').textContent = data.description
+    issue.querySelector('img').src = data.avatar
   }
   /**
    * Creates a new issue.

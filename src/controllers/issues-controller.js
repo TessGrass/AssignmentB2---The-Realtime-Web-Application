@@ -14,8 +14,10 @@ export class IssuesController {
    */
   async index (req, res, next) {
     try {
+      let closed = 0
       const fetchedData = await fetch(`https://gitlab.lnu.se/api/v4/projects/${process.env.PROJECT_ID}/issues?private_token=${process.env.TOKEN}`)
       const result = await fetchedData.json()
+      console.log(result)
       const data = result.map(data => ({
         id: `${data.id}`,
         iid: `${data.iid}`,
@@ -27,13 +29,23 @@ export class IssuesController {
       }))
 
       const count = Object.keys(data).length
-      console.log(count)
-      res.render('../views/issues/issues', { data })
+      Object.entries(data).forEach(([key, val]) => {
+        if (val.state === 'closed') {
+          closed++
+        }
+      })
+      const sum = Math.floor((100 * closed) / count)
+      console.log('.....')
+      console.log(sum)
+
+      // document.querySelector('.w3-container').setAttribute('style', 'width')
+      // document.querySelector('.w3-container').style.display = 'none'
+
+      res.render('../views/issues/issues', { data, sum })
     } catch (error) {
       next(error)
     }
   }
-
 
   /**
    * Updates the state of a specific issue.
@@ -61,7 +73,6 @@ export class IssuesController {
     }
   }
 }
-
 
 // "https://gitlab.example.com/api/v4/projects/4/issues/85?state_event=close"
 /*  'Content-type': 'application/json', */ // how to tell if it's needed? https://dmitripavlutin.com/fetch-with-json/

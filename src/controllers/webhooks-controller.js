@@ -34,7 +34,6 @@ export class WebhooksController {
       // Only interested in issues events. (But still, respond with a 200
       // for events not supported.)
       let data = null
-      console.log(req.body)
       if (req.body.event_type === 'issue') {
         data = {
           iid: req.body.object_attributes.iid,

@@ -19,13 +19,15 @@ const directoryFullName = dirname(fileURLToPath(import.meta.url)) // Search path
 const baseURL = process.env.BASE_URL || '/'
 
 try {
-  app.use(helmet({ crossOriginEmbedderPolicy: true }))
   app.use(helmet.contentSecurityPolicy({
     directives: {
-      imgSrc: ["'self'", 'secure.gravatar.com']
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", 'gitlab.lnu.se'],
+      imgSrc: ['gitlab.lnu.se', 'secure.gravatar.com']
     }
-  })
-  )
+  }))
+
+
   app.use(logger('dev'))
   app.set('view engine', 'ejs')
   app.set('views', 'src/views/')

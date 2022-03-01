@@ -12,7 +12,7 @@
             <%}%>            
             <p class="title-in-issue">#<%=obj.iid%>. <%=obj.title %></p>
             <p class="issue-description"><%=obj.description%></p>
-            <img src="<%=obj.avatar%>" id="img-right" crossorigin><br>
+            <img src="<%=obj.avatar%>" id="img-right"><br>
             <p class="author"><%=obj.author%></p>
        </div>
     </form>
@@ -21,10 +21,15 @@
       <p class="no-issues">Oh no! No issues to display.</p>
       <%}%>
   </div>
-  <div class="w3-light-grey">
-    <div class="w3-container" style="width:25%" background: red;></div>
+  <div class="progress-light-grey">
+    <!-- <div class="progress-container"  background: red;><%=sum%>%</div> -->
+    <!-- <div class="progress-container" style="width:<%=sum%>%" background: red;><%=sum%>%</div> -->
   </div>
-     <%# Socket.IO: Template for the client. The same as above, sort of. %>
+  <%console.log(sum)%>
+    <progress value="<%=sum%>"
+              max="100">
+  </progress>
+
      <div class="bodywrapper">
 <template id="issue-template">
     <form method="post" id="" action="./issues">
