@@ -11,7 +11,6 @@ export class WebhooksController {
  * @param {Function} next - Express next middleware function.
  */
   authenticate (req, res, next) {
-    console.log('athenticate webhook')
     if (req.headers['x-gitlab-token'] !== process.env.WEBHOOK_SECRET) {
       const error = new Error('Invalid token')
       error.status = 401

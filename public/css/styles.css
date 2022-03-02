@@ -8,7 +8,7 @@ body, html {
   overflow-y: hidden; /* Hide vertical scrollbar */
   overflow-x: hidden; /* Hide horizontal scrollbar */
   margin:0 auto;
-  height: 100%
+  height: 100%;
 
 }
 body > footer { 
@@ -33,7 +33,7 @@ body > footer {
 	flex-wrap: wrap;
   align-content: flex-start;
   background-color: #Fdfff5;
-  gap: 5%;
+  gap: 8%;
 }
 
 .footer-text {
@@ -127,7 +127,6 @@ input {
   padding: 10px;
 }
 
-
 @keyframes fadeIn {
   0% {opacity:0;}
   100% {opacity:1;}
@@ -177,7 +176,7 @@ input {
   height: 24px;
   width: 24px;
   border-radius: 50%;
-  background: #f04629;
+  background: #48dbbb;
   animation: pulse 1500ms infinite;
 }
 
@@ -216,7 +215,7 @@ input {
   position: relative;
   width: 19rem;
   min-height: 8rem;
-  margin-left: 20px;
+  margin-left: 25px;
   padding: 15px;
   background-color:#B4CFB0;
   border-radius: 10px;

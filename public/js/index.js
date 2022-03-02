@@ -41,7 +41,6 @@ if (issueTemplate) {
    * @param {object} data  - the data in the new issue.
    */
   function newIssue (data) {
-    console.log('newIssue')
     const template = document.querySelector('#issue-template').content.cloneNode(true)
     const bodywrapper = document.querySelector('.bodywrapper')
     template.querySelector('.issue-wrapper').setAttribute('id', `${data.iid}`)
