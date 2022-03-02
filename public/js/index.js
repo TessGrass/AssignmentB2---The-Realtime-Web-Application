@@ -22,7 +22,6 @@ if (issueTemplate) {
     const issue = document.querySelector(`[id="${data.iid}"]`)
     const button = issue.querySelector('button')
 
-    console.log(data.state)
     if (data.state === 'opened') {
       button.removeAttribute('class', 'closed-issue-btn')
       button.classList.add('open-issue-btn')
@@ -33,9 +32,8 @@ if (issueTemplate) {
       button.textContent = 'closed'
     }
 
-    issue.querySelector('.title-in-issue').textContent = `# ${data.iid}. ${data.title}`
+    issue.querySelector('.title-in-issue').textContent = `#${data.iid}. ${data.title}`
     issue.querySelector('.issue-description').textContent = data.description
-    issue.querySelector('img').src = data.avatar
   }
   /**
    * Creates a new issue.
@@ -48,7 +46,7 @@ if (issueTemplate) {
     const bodywrapper = document.querySelector('.bodywrapper')
     template.querySelector('.issue-wrapper').setAttribute('id', `${data.iid}`)
     template.querySelector('form').setAttribute('id', `${data.iid}`)
-    template.querySelector('.title-in-issue').textContent = `# ${data.iid}. ${data.title}`
+    template.querySelector('.title-in-issue').textContent = `#${data.iid}. ${data.title}`
     template.querySelector('.issue-description').textContent = data.description
     template.querySelector('img').src = data.avatar
     template.querySelector('.author').textContent = data.author

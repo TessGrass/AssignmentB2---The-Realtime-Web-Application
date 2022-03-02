@@ -21,14 +21,10 @@
       <p class="no-issues">Oh no! No issues to display.</p>
       <%}%>
   </div>
-  <div class="progress-light-grey">
-    <!-- <div class="progress-container"  background: red;><%=sum%>%</div> -->
-    <!-- <div class="progress-container" style="width:<%=sum%>%" background: red;><%=sum%>%</div> -->
-  </div>
-  <%console.log(sum)%>
-    <progress value="<%=sum%>"
-              max="100">
-  </progress>
+  <div class="progress-class">
+    <p class="progress-text">Completed issues: <%=sum%>%<p>
+    <progress value="<%=sum%>"max="100"><%=sum%>%</progress>
+    </div>
 
      <div class="bodywrapper">
 <template id="issue-template">
@@ -38,7 +34,7 @@
     <input type="hidden" name="id" value=""/>
       <p class="title-in-issue"></p><br>
       <p class="issue-description"></p>
-      <img src="" id="img-right" crossorigin>
+      <img src="" id="img-right">
       <p class="author"></p>
     </div>
       </form>

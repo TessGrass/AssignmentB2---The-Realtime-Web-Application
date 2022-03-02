@@ -13,7 +13,6 @@ import { fileURLToPath } from 'node:url'
 import { createServer } from 'node:http'
 import { Server } from 'socket.io'
 import helmet from 'helmet'
-// import cors from 'cors'
 const app = express()
 const directoryFullName = dirname(fileURLToPath(import.meta.url)) // Search path from C:/ to src.
 const baseURL = process.env.BASE_URL || '/'
@@ -27,17 +26,16 @@ try {
     }
   }))
 
-
   app.use(logger('dev'))
   app.set('view engine', 'ejs')
   app.set('views', 'src/views/')
   app.use(expressLayouts)
   app.set('layout', join(directoryFullName, 'views', 'layouts', 'default'))
-  app.use(express.urlencoded({ extended: false })) // if removed, you can't add products. Handles form data
+  app.use(express.urlencoded({ extended: false }))
   app.use(express.static(join(directoryFullName, '..', 'public')))
 
   if (app.get('env') === 'production') {
-    app.set('trust proxy', 1) // trust first proxy
+    app.set('trust proxy', 1)
   }
   app.use(express.json())
 
@@ -72,8 +70,6 @@ try {
     }
     if (err.status === 404) {
       return res.status(404).render(join(directoryFullName, 'views', 'errors', '404.ejs'))
-    } else if (err.status === 403) {
-      return res.status(403).render(join(directoryFullName, 'views', 'errors', '403.ejs'))
     } else if (err.status === 500) {
       return res.status(500).render(join(directoryFullName, 'views', 'errors', '500.ejs'))
     }

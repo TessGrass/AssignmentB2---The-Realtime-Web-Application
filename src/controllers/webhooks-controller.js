@@ -31,8 +31,6 @@ export class WebhooksController {
    */
   async indexWebhooks (req, res, next) {
     try {
-      // Only interested in issues events. (But still, respond with a 200
-      // for events not supported.)
       let data = null
       if (req.body.event_type === 'issue') {
         data = {
@@ -44,12 +42,9 @@ export class WebhooksController {
           avatar: req.body.user.avatar_url
         }
       }
-      // It is important to respond quickly!
       res.status(200).end()
 
-      // Put this last because socket communication can take long time.
       if (data) {
-        console.log('emit')
         if (req.body.changes.updated_at.previous === null) {
           res.io.emit('newIssue', data)
         } else {

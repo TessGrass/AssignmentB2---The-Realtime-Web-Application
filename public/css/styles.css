@@ -18,7 +18,6 @@ body > footer {
     width: 100%;
     height: 50px;
     background: #162d2e;
-    /* background-color: rgb(187, 245, 221); */
 }
 
 .container {
@@ -46,6 +45,35 @@ body > footer {
 
 .issuetext {
   margin-left: 1em;
+}
+
+progress {
+  text-align: center;
+  border: 0;
+  height: 20px;
+  width: 300px;
+  border-radius: 9px;
+}
+progress::-webkit-progress-bar {
+  border-radius: 9px;
+  background-color: #cacaca;
+}
+progress::-webkit-progress-value {
+  border-radius: 9px;
+  background-color: #f5bc52;
+}
+progress::-moz-progress-bar {
+  background-color: #cacaca;
+  background-color: rgb(77, 199, 172);
+}
+
+.progress-class {
+  text-align: center;
+}
+
+.progress-text {
+  font-size: 14px;
+  margin:0;
 }
 
 hr {
@@ -129,15 +157,12 @@ input {
 }
 
 .third-row-startpage {
-  position: absolute;
   font-weight: 200;
   font-size: 32px;
   line-height:1px;
     padding: 0;
     margin-top: 0;
-
 }
-
 
 .dot-container {
   background: yellow;
@@ -152,7 +177,7 @@ input {
   height: 24px;
   width: 24px;
   border-radius: 50%;
-  background: #e8b852;
+  background: #f04629;
   animation: pulse 1500ms infinite;
 }
 
@@ -171,22 +196,9 @@ input {
   margin-left: 50px;
 }
 
-.error-image {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  height: 50%;
-}
-
 .error-text {
   font-size: 18px;
   text-align: center;
-}
-
-.error-text-pass {
-  text-align: center;
-  font-size: 22px;
 }
 
 .child-of-issue-list-wrapper {
@@ -202,9 +214,9 @@ input {
 
 .issue-wrapper {
   position: relative;
-  width: 21rem;
+  width: 19rem;
   min-height: 8rem;
-  margin-left: 15px;
+  margin-left: 20px;
   padding: 15px;
   background-color:#B4CFB0;
   border-radius: 10px;
@@ -259,7 +271,7 @@ span {
   color: red;
 }
 .title-in-issue {
-  font-size: 16px;
+  font-size: 15px;
   margin: 0px;
   color: black;
 }
@@ -276,8 +288,7 @@ span {
 #img-right {
   position: absolute;
   top: 62px;
-  right: 13px;
-  border-radius: 50%;
+  right: 11px;
   width: 65px;
   height: 65px;
   padding-right: 12px;
@@ -287,18 +298,6 @@ form {
   display: inline-block;
   width: 20%;
 }
-
-.progress-container {
-  text-align: center;
-  background: red;
-}
-
-.progress-light-grey {
-  margin-left: 35%;
-  width: 300px;
-  background: blue;
-}
-
 
 /* The switch - the box around the slider */
 .switch {
