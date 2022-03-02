@@ -17,7 +17,6 @@ export class WebhooksController {
       next(error)
       return
     }
-
     next()
   }
 
